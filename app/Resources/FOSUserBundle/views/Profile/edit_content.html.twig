@@ -1,0 +1,21 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="login-form" style="margin-top: 20px">
+    <div class="main-register">
+        <div class="panel">
+            <h2>School admin</h2>
+            <p>Modification du profil</p>
+        </div>
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        {{ form_widget(form) }}
+        <div>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+        </div>
+        {{ form_end(form) }}
+        <br/>
+        <a href="{{ path('fos_user_profile_show') }}" class="text-left">Retour</a>
+    </div>
+    <p class="botto-text"> Designed by Ghost Studio</p>
+</div>
+

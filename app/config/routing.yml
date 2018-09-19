@@ -1,0 +1,9 @@
+school_app:
+    resource: "@SchoolAppBundle/Resources/config/routing.yml"
+    prefix:   /dashboard
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

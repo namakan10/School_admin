@@ -1,0 +1,17 @@
+{% extends '@SchoolApp/Caisse/newExit.html.twig' %}
+
+{% block title %}Modification d'une sorite{% endblock %}
+
+{% block subTitle %}Modification de la sortie du {{ record.date|date('d-M-y') }}{% endblock %}
+
+{% block cancel %}
+    <a href="{{ path('cashRegister_record')}}"><button class="btn btn-danger">Retour</button></a>
+{% endblock %}
+
+{% block scriptCustom %}
+    <script>
+        {% if update is defined %}
+            alert("{{ update }}");
+        {% endif %}
+    </script>
+{% endblock %}

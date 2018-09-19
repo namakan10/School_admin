@@ -1,0 +1,110 @@
+{% extends '@SchoolApp/layout.html.twig' %}
+
+{% block title %}Classes{% endblock %}
+
+{% block activeClasses %}active{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="card strpied-tabled-with-hover">
+            <div class="card-header ">
+                <h4 class="card-title">
+                    <span class="col-sm-8">{% block subTitle %}Liste des classes{% endblock %}</span>
+                    {% block addclass %}
+                        <a href="{{ path('school_app_add_class') }}"><button class="btn btn-primary" style="margin-left: 600px">Ajouter une classe</button></a>
+                    {% endblock %}
+                </h4>
+            </div>
+            <div class="card-body table-full-width table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <th>Numéro</th>
+                        <th>Nom</th>
+                        {% block th %}
+                            <th>Places</th>
+                            <th>Places occupées</th>
+                            <th>Niveau</th>
+                            <th>Frais d'Inscription</th>
+                            <th>Frais Annuel</th>
+                        {% endblock %}
+                            <th></th>
+                        {% if admin %}
+                            <th></th>
+                            <th></th>
+                        {% endif %}
+                    </thead>
+                    <tbody>
+
+                    {% if classes %}
+                        {% for class in classes %}
+                            <tr>
+                                <td>{{ class.numero }}</td>
+                                <td>{{ class.nom }}</td>
+                                {% block tr %}
+                                    <td>{{ class.capMax }}</td>
+                                    <td>{{ class.capNow }}</td>
+                                    <td>{{ class.level }}</td>
+                                    <td>{{ class.registration }}</td>
+                                    <td>{{ class.annual }}</td>
+                                {% endblock %}
+                                {% block link %}
+                                    <td><a href="{{ path('school_app_sudent_details', {'id' : class.id}) }}"><i class="fas fa-info-circle"></i></a></td>
+                                {% endblock %}
+                                {% if admin %}
+                                    <td><a href="{{ path('edit_class', {'id' : class.id}) }}"><i class="fas fa-edit"></i></a></td>
+                                    <td><a class="confirmModalLink" href="{{ path('remove_class', {'id' : class.id}) }}" style="color: red"><i class="fas fa-trash-alt"></i></a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal hide fade" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Confirmation de la suppression</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Tous les élèves de la classe seront aussi supprimer. Etes-vous sûr de vouloir supprimer cette classe ?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-danger" id="confirmModalNo">Non</a>
+                    <a href="#" class="btn btn-success" id="confirmModalYes">Oui</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block scriptCustom %}
+    <script>
+        $(document).ready(function () {
+            var theHREF;
+
+            $(".confirmModalLink").click(function(e) {
+                e.preventDefault();
+                theHREF = $(this).attr("href");
+                $("#confirmModal").modal("show");
+            });
+
+            $("#confirmModalNo").click(function(e) {
+                $("#confirmModal").modal("hide");
+            });
+
+            $("#confirmModalYes").click(function(e) {
+                window.location.href = theHREF;
+            });
+        });
+
+    </script>
+{% endblock %}

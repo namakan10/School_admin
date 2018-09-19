@@ -1,0 +1,13 @@
+{% extends '@SchoolApp/Student/inscription_eleves.html.twig' %}
+
+{% block title %}Elève{% endblock %}
+{% block activeClasses%}active{% endblock %}
+
+
+{% block recordpay %}
+    <a href="{{ path('new_payment', {'id' : id}) }}"><span class="badge badge-pill badge-success">Nouveau Payment</span></a>
+    <a href="{{ path('payment_record', {'id' : id}) }}"><span class="badge badge-pill badge-warning">Voir l'istorique</span></a>
+{% endblock %}
+
+{% block back %}<a href="{{ path('school_app_details_class', {'id': class.id}) }}" style="color: black"><i class="far fa-arrow-alt-circle-left"> </i></a>{% endblock %}
+

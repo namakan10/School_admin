@@ -1,0 +1,97 @@
+{% extends '@SchoolApp/layout.html.twig' %}
+
+{% block title %}Historique des sorties{% endblock %}
+
+{% block activeCaisse %}active{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="card strpied-tabled-with-hover">
+            <div class="card-header ">
+                <h4 class="card-title col">
+                    <span class="col-sm-3"><a href="{{ path('caisse_view') }}" style="color: black"><i class="far fa-arrow-alt-circle-left"></i></a> Historique des sorties</span>
+                    <a href="{{ path('new_exit') }}"><button class="btn btn-success" style="margin-left: 530px">Nouvelle sortie</button></a>
+                </h4>
+            </div>
+            <div class="card-body table-full-width table-responsive">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <th>Date</th>
+                    <th>Motif</th>
+                    <th>Montant</th>
+                    {% if admin %}
+                        <th></th>
+                        <th></th>
+                    {% endif %}
+                    </thead>
+                    <tbody>
+
+                    {% if record %}
+                        {% for rec in record %}
+                            <tr>
+                                <td>{{ rec.date|date('d-M-y') }}</td>
+                                <td>{{ rec.motive }}</td>
+                                <td>{{ rec.amout }}</td>
+                                {% if admin %}
+                                    <td><a href="{{ path('edit_exit', {'id' : rec.id}) }}"><i class="fas fa-edit"></i></a></td>
+                                    <td><a class="confirmModalLink" href="{{ path('remove_exit', {'id' : rec.id}) }}" style="color: red"><i class="fas fa-trash-alt"></i></a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    {# Modal de suppression #}
+    <div class="modal hide fade" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Confirmation de la suppression</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cet élément ?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-danger" id="confirmModalNo">Non</a>
+                    <a href="#" class="btn btn-success" id="confirmModalYes">Oui</a>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+{% endblock %}
+
+{% block scriptCustom %}
+    <script>
+        $(document).ready(function () {
+            var theHREF;
+
+            $(".confirmModalLink").click(function(e) {
+                e.preventDefault();
+                theHREF = $(this).attr("href");
+                $("#confirmModal").modal("show");
+            });
+
+            $("#confirmModalNo").click(function(e) {
+                $("#confirmModal").modal("hide");
+            });
+
+            $("#confirmModalYes").click(function(e) {
+                window.location.href = theHREF;
+            });
+        });
+
+    </script>
+{% endblock %}

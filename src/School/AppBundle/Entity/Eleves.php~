@@ -1,0 +1,373 @@
+<?php
+
+namespace School\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Eleves
+ *
+ * @ORM\Table(name="eleves")
+ * @ORM\Entity(repositoryClass="School\AppBundle\Repository\ElevesRepository")
+ */
+class Eleves
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="School\AppBundle\Entity\Classes", inversedBy="eleves", cascade={"persist"})
+     */
+    private $classes;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="School\AppBundle\Entity\Payment", inversedBy="student")
+     */
+    private $pay;
+
+    /**
+     * @ORM\OneToMany(targetEntity="School\AppBundle\Entity\Payrecord", mappedBy="student")
+     */
+    private $record;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="School\AppBundle\Entity\Year")
+     */
+    private $year;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="School\AppBundle\Entity\Parents", mappedBy="student", cascade={"persist"})
+     */
+    private $parents;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Status", type="string", length=255)
+     */
+    private $status;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Prenom", type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="Birthdate", type="date")
+     */
+    private $birthdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Birthplace", type="string", length=255)
+     */
+    private $birthplace;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Matricule", type="string", length=255, unique=true)
+     */
+    private $matricule;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Eleves
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prenom
+     *
+     * @param string $prenom
+     *
+     * @return Eleves
+     */
+    public function setPrenom($prenom)
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get prenom
+     *
+     * @return string
+     */
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * Set birthdate
+     *
+     * @param \DateTime $birthdate
+     *
+     * @return Eleves
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthdate
+     *
+     * @return \DateTime
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * Set birthplace
+     *
+     * @param string $birthplace
+     *
+     * @return Eleves
+     */
+    public function setBirthplace($birthplace)
+    {
+        $this->birthplace = $birthplace;
+
+        return $this;
+    }
+
+    /**
+     * Get birthplace
+     *
+     * @return string
+     */
+    public function getBirthplace()
+    {
+        return $this->birthplace;
+    }
+
+    /**
+     * Set matricule
+     *
+     * @param string $matricule
+     *
+     * @return Eleves
+     */
+    public function setMatricule($matricule)
+    {
+        $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    /**
+     * Get matricule
+     *
+     * @return string
+     */
+    public function getMatricule()
+    {
+        return $this->matricule;
+    }
+
+    /**
+     * Set classes
+     *
+     * @param \School\AppBundle\Entity\Classes $classes
+     *
+     * @return Eleves
+     */
+    public function setClasses(\School\AppBundle\Entity\Classes $classes = null)
+    {
+        $this->classes = $classes;
+
+        return $this;
+    }
+
+    /**
+     * Get classes
+     *
+     * @return \School\AppBundle\Entity\Classes
+     */
+    public function getClasses()
+    {
+        return $this->classes;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->parents = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set pay
+     *
+     * @param \School\AppBundle\Entity\Payment $pay
+     *
+     * @return Eleves
+     */
+    public function setPay(\School\AppBundle\Entity\Payment $pay = null)
+    {
+        $this->pay = $pay;
+
+        return $this;
+    }
+
+    /**
+     * Get pay
+     *
+     * @return \School\AppBundle\Entity\Payment
+     */
+    public function getPay()
+    {
+        return $this->pay;
+    }
+
+    /**
+     * Add parent
+     *
+     * @param \School\AppBundle\Entity\Parents $parent
+     *
+     * @return Eleves
+     */
+    public function addParent(\School\AppBundle\Entity\Parents $parent)
+    {
+        $this->parents[] = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Remove parent
+     *
+     * @param \School\AppBundle\Entity\Parents $parent
+     */
+    public function removeParent(\School\AppBundle\Entity\Parents $parent)
+    {
+        $this->parents->removeElement($parent);
+    }
+
+    /**
+     * Get parents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParents()
+    {
+        return $this->parents;
+    }
+
+    /**
+     * Add record
+     *
+     * @param \School\AppBundle\Entity\Payrecord $record
+     *
+     * @return Eleves
+     */
+    public function addRecord(\School\AppBundle\Entity\Payrecord $record)
+    {
+        $this->record[] = $record;
+
+        return $this;
+    }
+
+    /**
+     * Remove record
+     *
+     * @param \School\AppBundle\Entity\Payrecord $record
+     */
+    public function removeRecord(\School\AppBundle\Entity\Payrecord $record)
+    {
+        $this->record->removeElement($record);
+    }
+
+    /**
+     * Get record
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecord()
+    {
+        return $this->record;
+    }
+
+    /**
+     * Set year
+     *
+     * @param \School\AppBundle\Entity\Year $year
+     *
+     * @return Eleves
+     */
+    public function setYear(\School\AppBundle\Entity\Year $year = null)
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * Get year
+     *
+     * @return \School\AppBundle\Entity\Year
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+}

@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="login-form" style="margin-top: 50px">
+    <div class="main-register">
+        <div class="panel">
+            <h2>School Admin</h2>
+            <p>Interface utilisateur</p>
+        </div>
+        <a href="{{ path('fos_user_change_password') }}" style="text-decoration: none"><button class="btn btn-primary btn-lg btn-block">Modifier le mot de passe</button></a>
+        <br/>
+        <a href="{{ path('fos_user_profile_edit') }}" style="text-decoration: none"><button class="btn btn-primary btn-lg btn-block">Modifier le login</button></a>
+        <br/>
+        <a href="{{ path('school_app_homepage') }}" class="text-left"><button class="btn btn-outline-primary">Acceuil</button></a>
+    </div>
+    <p class="botto-text"> Designed by Ghost Studio</p>
+</div>
+

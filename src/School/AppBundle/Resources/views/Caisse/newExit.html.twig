@@ -1,0 +1,64 @@
+{% extends '@SchoolApp/layout.html.twig' %}
+
+{% block title %}Nouvelle sortie{% endblock %}
+
+{% block activeCaisse %}active{% endblock %}
+
+{% block content %}
+
+    <div class="col-sm-2"></div>
+    <div class="col-md-8">
+        <br/><br/>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">{% block subTitle %}Nouvelle sortie{% endblock %}</h4>
+            </div>
+            <div class="card-body">
+                <div>
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+                        <div class="">
+                            {{ form_label(form.motive) }}
+                            <div class="col-sm-12">
+                                {{ form_widget(form.motive, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="">
+                            {{ form_label(form.amout) }}
+                            <div class="col-sm-12">
+                                {{ form_widget(form.amout, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row">
+
+
+                            <div class="col-md-7 pr-1">
+                                <div class="" >
+
+                                </div>
+                            </div>
+                            <div class="col-md-5 pl-1">
+                                <div style="margin-left: 175px">
+                                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        {% block cancel %}
+            <a href="{{ path('caisse_view')}}"><button class="btn btn-danger">Annuler</button></a>
+        {% endblock %}
+    </div>
+
+{% endblock %}
+
+{% block scriptCustom %}
+    <script>
+        {% if error is defined %}
+        alert("{{ error }}");
+        {% endif %}
+    </script>
+{% endblock %}

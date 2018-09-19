@@ -1,0 +1,180 @@
+{% extends '@SchoolApp/layout.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block activeInscripion %}
+    {% if inscrip %}
+        active
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row">
+            {% if notclass %}
+                <p>Veuillez créer d'abord une classe</p>
+            {% else %}
+            <div class="col-md-7">
+                {{ form_start(form) }}
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{% block back %}{% endblock %} Elève</h4>
+                        <hr/>
+                    </div>
+                    <div class="card-body">
+
+
+                            <div class="row">
+                                <div class="col-md-6 pr-1">
+                                    <div class="form-group">
+                                        {{ form_label(form.firstname) }}
+                                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pl-1">
+                                    <div class="form-group">
+                                        {{ form_label(form.lastname) }}
+                                        {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 pr-1">
+                                    <div class="form-group">
+                                        {{ form_label(form.birthdate) }}
+                                        {{ form_widget(form.birthdate, {'attr': {'data-field': 'datetime'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pl-1">
+                                    <div class="form-group">
+                                        {{ form_label(form.birthplace) }}
+                                        {{ form_widget(form.birthplace, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{ form_label(form.classe) }}
+                                        {{ form_widget(form.classe, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{ form_label(form.pay) }}
+                                        {{ form_widget(form.pay, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% block recordpay %}
+                            {% endblock %}
+                            <br/><br/><br/><br/>
+                            {% block adminUpdate %}
+                               {{ form_widget(form.Inscrire, {'attr': {'class': 'btn btn-info btn-fill pull-right'}}) }}
+
+                            {% endblock %}
+                            <br/><br/>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Père</h4>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form_label(form.fathername) }}
+                                    {{ form_widget(form.fathername, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form_label(form.fatherjob) }}
+                                    {{ form_widget(form.fatherjob, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    {{ form_label(form.fatherphone) }}
+                                    {{ form_widget(form.fatherphone, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{ form_label(form.fatheradresse) }}
+                                    {{ form_widget(form.fatheradresse, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-header">
+                            <h4 class="card-title">Mère</h4>
+                            <hr>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form_label(form.mothername) }}
+                                    {{ form_widget(form.mothername, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    {{ form_label(form.motherlastname) }}
+                                    {{ form_widget(form.motherlastname, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form_label(form.motherjob) }}
+                                    {{ form_widget(form.motherjob, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    {{ form_label(form.motherphone) }}
+                                    {{ form_widget(form.motherphone, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            {{ form_end(form) }}
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block scriptCustom %}
+    <script src="{{ asset('bundles/schoolapp/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('bundles/schoolapp/js/DateTimePicker.js') }}"></script>
+    <script src="{{ asset('bundles/schoolapp/js/moment-with-locales.min.js') }}"></script>
+    <script>
+        {% if error is defined %}
+            alert("{{ error }}");
+        {% endif %}
+    </script>
+
+{% endblock %}

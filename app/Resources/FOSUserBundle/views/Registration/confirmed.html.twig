@@ -1,0 +1,17 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="login-form" style="margin-top: 10px">
+        <div class="main-register">
+            <div class="panel">
+                <h2>School Admin</h2>
+            </div>
+            <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }} Cliquer sur le lien pour vous revenir à l'interface d'utilisateur
+                <a href="{{ path('fos_user_profile_show') }}">Retour</a>
+            </p>
+        </div>
+        <p class="botto-text"> Designed by Ghost Studio</p>
+    </div>
+{% endblock fos_user_content %}

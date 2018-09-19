@@ -1,0 +1,102 @@
+<?php
+
+namespace School\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Cost
+ *
+ * @ORM\Table(name="cost")
+ * @ORM\Entity(repositoryClass="School\AppBundle\Repository\CostRepository")
+ */
+class Cost
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="School\AppBundle\Entity\Classes", mappedBy="cost")
+     */
+    private $class;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="registration", type="integer")
+     */
+    private $registration;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="annual", type="integer")
+     */
+    private $annual;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set registration
+     *
+     * @param integer $registration
+     *
+     * @return Cost
+     */
+    public function setRegistration($registration)
+    {
+        $this->registration = $registration;
+
+        return $this;
+    }
+
+    /**
+     * Get registration
+     *
+     * @return int
+     */
+    public function getRegistration()
+    {
+        return $this->registration;
+    }
+
+    /**
+     * Set annual
+     *
+     * @param integer $annual
+     *
+     * @return Cost
+     */
+    public function setAnnual($annual)
+    {
+        $this->annual = $annual;
+
+        return $this;
+    }
+
+    /**
+     * Get annual
+     *
+     * @return int
+     */
+    public function getAnnual()
+    {
+        return $this->annual;
+    }
+}
+

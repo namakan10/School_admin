@@ -1,0 +1,20 @@
+{% extends '@SchoolApp/Class/addClass.html.twig' %}
+
+{% block subTitle %} <a href="{{ path('school_app_class') }}" style="color: black"><i class="far fa-arrow-alt-circle-left"></i></a> Modification de la classe{% endblock %}
+
+{% block title %}Edit classe{% endblock %}
+
+
+{% block submit %}
+    {{ form_widget(form.Creer, {'attr': {'class': 'btn btn-info', 'label' : "Modifier"}}) }}
+{% endblock %}
+
+
+
+{% block scriptCustom %}
+    <script>
+        {% if error is defined %}
+            alert("{{ error }}");
+        {% endif %}
+    </script>
+{% endblock %}

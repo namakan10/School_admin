@@ -1,0 +1,68 @@
+school_app_homepage:
+    path:     /
+    defaults: { _controller: SchoolAppBundle:Default:index }
+
+school_app_class:
+    path:     /classes
+    defaults: { _controller: SchoolAppBundle:listview:class}
+
+school_app_add_class:
+    path:     /classes/add
+    defaults: { _controller: SchoolAppBundle:add:addClass}
+
+edit_class:
+  path:     /edit/classes/{id}
+  defaults: { _controller: SchoolAppBundle:add:updateClasse}
+
+remove_class:
+  path:     /remove/classes/{id}
+  defaults: { _controller: SchoolAppBundle:remove:removeClass}
+
+school_app_details_class:
+    path:     /classes/{id}
+    defaults: { _controller:  SchoolAppBundle:listview:detailsclass}
+
+school_app_sudent_registration:
+    path:     /inscription
+    defaults: { _controller: SchoolAppBundle:add:inscription}
+
+school_app_sudent_details:
+    path:     /eleves/{id}
+    defaults: { _controller: SchoolAppBundle:detailsview:studentdetails}
+
+
+remove_student:
+    path:     /remove/eleves/{id}
+    defaults: { _controller: SchoolAppBundle:remove:removeStudent}
+
+new_payment:
+    path:     /classes/eleves/payment/{id}
+    defaults: { _controller: SchoolAppBundle:add:newPayment}
+
+edit_payment:
+  path:     /edit/eleves/payment/{id}
+  defaults: { _controller: SchoolAppBundle:add:updatePayement}
+
+payment_record:
+    path:     /classes/eleves/historique/{id}
+    defaults: { _controller: SchoolAppBundle:listview:payrecord}
+
+caisse_view:
+    path:     /caisse
+    defaults: { _controller: SchoolAppBundle:listview:caiseview}
+
+new_exit:
+  path:     /caisse/sortie
+  defaults: { _controller: SchoolAppBundle:add:newExit}
+
+edit_exit:
+    path:     /edit/caisse/sortie/{id}
+    defaults: { _controller: SchoolAppBundle:add:updateExit}
+
+remove_exit:
+  path:     /remove/caisse/historique/{id}
+  defaults: { _controller: SchoolAppBundle:remove:removeExitRecord}
+
+cashRegister_record:
+    path:     /caisse/historique
+    defaults: { _controller: SchoolAppBundle:listview:cashRegisterRecord}

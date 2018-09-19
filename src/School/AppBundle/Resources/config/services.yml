@@ -1,0 +1,20 @@
+services:
+#    school_app.example:
+#        class: School\AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+     add_student:
+         class:  School\AppBundle\Services\addStudent
+         arguments: [ "@doctrine.orm.entity_manager"]
+
+     checkYear:
+         class:    School\AppBundle\Services\checkActiveYear
+         arguments:  [ "@doctrine.orm.entity_manager"]
+
+     payStatus:
+         class:    School\AppBundle\Services\paySatus
+         arguments:    ["@doctrine.orm.entity_manager"]
+
+     cashRegister:
+       class:    School\AppBundle\Services\cashRegisterServices
+       arguments:    ["@doctrine.orm.entity_manager"]

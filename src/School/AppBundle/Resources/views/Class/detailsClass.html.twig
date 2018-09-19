@@ -1,0 +1,106 @@
+{% extends '@SchoolApp/layout.html.twig' %}
+
+{% block title %}Classes{% endblock %}
+
+{% block activeClasses %}active{% endblock %}
+
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="card strpied-tabled-with-hover">
+            <div class="card-header ">
+                <h4 class="card-title">
+                    <span class="col-sm-8">Classe : {{ classes.nom }}</span>
+                    {# <a href="{{ path('school_app_add_class') }}"><button class="btn btn-primary" style="margin-left: 600px">Ajouter une classe</button></a> #}
+                </h4>
+            </div>
+            <div class="card-body table-full-width table-responsive">
+                <table class="table table-hover table-striped" id="table_id">
+                    <thead>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date et lieu de naissance</th>
+                        <th>Matricule</th>
+                        <th>Status de payement</th>
+                        {% if admin %}
+                            <th></th>
+                        {% endif %}
+                    </thead>
+                    <tbody>
+                        {% if student %}
+                            {% for std in student %}
+                                {% set counter = (counter | default(0))+1 %}
+                                <tr>
+                                    <td>{{ counter }}</td>
+                                    <td>{{ std.nom }}</td>
+                                    <td>{{ std.prenom }}</td>
+                                    <td>{{ std.birthdate|date('d-m-Y')}} à {{ std.birthplace }}</td>
+                                    <td>{{ std.matricule }}</td>
+                                    <td>
+                                        {% if std.status == "A jour" %}
+                                            <span class="badge badge-pill badge-warning">{{ std.status }}</span>
+                                        {% elseif std.status == "En avance" %}
+                                            <span class="badge badge-pill badge-success">{{ std.status }}</span>
+                                        {% elseif std.status == "En retard" %}
+                                            <span class="badge badge-pill badge-danger">{{ std.status }}</span>
+                                        {% elseif std.status == "Achevé" %}
+                                            <span class="badge badge-pill badge-success">{{ std.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td><a href="{{ path('school_app_sudent_details', {'id' : std.id}) }}"><i class="fas fa-info-circle"></i></a></td>
+                                    {% if admin %}
+                                        <td><a class="confirmModalLink" href="{{ path('remove_student', {'id' : std.id}) }}" style="color:red;"><i class="fas fa-trash-alt"></i></a></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Confirmation de la suppression</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cet élément ?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-danger" id="confirmModalNo">Non</a>
+                    <a href="#" class="btn btn-success" id="confirmModalYes">Oui</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scriptCustom %}
+    <script>
+        $(document).ready(function () {
+            var theHREF;
+
+            $(".confirmModalLink").click(function(e) {
+                e.preventDefault();
+                theHREF = $(this).attr("href");
+                $("#confirmModal").modal("show");
+            });
+
+            $("#confirmModalNo").click(function(e) {
+                $("#confirmModal").modal("hide");
+            });
+
+            $("#confirmModalYes").click(function(e) {
+                window.location.href = theHREF;
+            });
+        });
+
+    </script>
+{% endblock %}

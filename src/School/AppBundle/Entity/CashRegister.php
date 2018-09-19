@@ -1,0 +1,202 @@
+<?php
+
+namespace School\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CashRegister
+ *
+ * @ORM\Table(name="cash_register")
+ * @ORM\Entity(repositoryClass="School\AppBundle\Repository\CashRegisterRepository")
+ */
+class CashRegister
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="School\AppBundle\Entity\Year", inversedBy="cashregister")
+     */
+    private $year;
+
+    /**
+     * @ORM\OneToMany(targetEntity="School\AppBundle\Entity\SpentRecord", mappedBy="cashregister")
+     */
+    private $record;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="enter", type="integer")
+     */
+    private $enter;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="spent", type="integer")
+     */
+    private $spent;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="avialable", type="integer")
+     */
+    private $avialable;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set enter
+     *
+     * @param integer $enter
+     *
+     * @return CashRegister
+     */
+    public function setEnter($enter)
+    {
+        $this->enter = $enter;
+
+        return $this;
+    }
+
+    /**
+     * Get enter
+     *
+     * @return int
+     */
+    public function getEnter()
+    {
+        return $this->enter;
+    }
+
+    /**
+     * Set spent
+     *
+     * @param integer $spent
+     *
+     * @return CashRegister
+     */
+    public function setSpent($spent)
+    {
+        $this->spent = $spent;
+
+        return $this;
+    }
+
+    /**
+     * Get spent
+     *
+     * @return int
+     */
+    public function getSpent()
+    {
+        return $this->spent;
+    }
+
+    /**
+     * Set avialable
+     *
+     * @param integer $avialable
+     *
+     * @return CashRegister
+     */
+    public function setAvialable($avialable)
+    {
+        $this->avialable = $avialable;
+
+        return $this;
+    }
+
+    /**
+     * Get avialable
+     *
+     * @return int
+     */
+    public function getAvialable()
+    {
+        return $this->avialable;
+    }
+
+    /**
+     * Set year
+     *
+     * @param \School\AppBundle\Entity\Year $year
+     *
+     * @return CashRegister
+     */
+    public function setYear(\School\AppBundle\Entity\Year $year = null)
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * Get year
+     *
+     * @return \School\AppBundle\Entity\Year
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->record = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add record
+     *
+     * @param \School\AppBundle\Entity\SpentRecord $record
+     *
+     * @return CashRegister
+     */
+    public function addRecord(\School\AppBundle\Entity\SpentRecord $record)
+    {
+        $this->record[] = $record;
+
+        return $this;
+    }
+
+    /**
+     * Remove record
+     *
+     * @param \School\AppBundle\Entity\SpentRecord $record
+     */
+    public function removeRecord(\School\AppBundle\Entity\SpentRecord $record)
+    {
+        $this->record->removeElement($record);
+    }
+
+    /**
+     * Get record
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecord()
+    {
+        return $this->record;
+    }
+}

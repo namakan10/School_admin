@@ -1,0 +1,54 @@
+{% extends '@SchoolApp/layout.html.twig' %}
+{% block title %}Caisse{% endblock %}
+
+{% block activeCaisse %}active{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="card strpied-tabled-with-hover">
+            <div class="card-header ">
+                <h4 class="card-title">
+                    <span class="col-sm-8">Caisse</span>
+                    {# <a href="{{ path('school_app_add_class') }}"><button class="btn btn-primary" style="margin-left: 600px">Ajouter une classe</button></a> #}
+                </h4>
+            </div>
+            <div class="card-body table-full-width table-responsive">
+                <form style="margin-left: 15px">
+                    <div class="form-group">
+                        <div class="col" style="margin-left: -20px">
+                            <label for="enter" class="col-sm-2 col-form-label">Entrées</label>
+                            <i class="fas fa-donate"></i>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="enter" value ="{{ enter }} francs cfa" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col" style="margin-left: -20px">
+                            <label for="exit" class="col-sm-2 col-form-label">Sorties</label>
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="exit" value="{{ exit }} francs cfa" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col" style="margin-left: -20px">
+                            <label for="total" class="col-sm-2 col-form-label">Montant disponible </label>
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="total" value="{{ avialable }} francs cfa" disabled>
+                        </div>
+                    </div>
+                </form>
+                <br/>
+                <div class="col">
+                    <a href="{{ path('new_exit') }}"><button class="btn btn-primary">Nouvelle sortie</button></a>
+                    <a href="{{ path('cashRegister_record') }}"><button class="btn btn-warning">Historique des sorties</button></a>
+                </div>
+                <br/>
+            </div>
+        </div>
+    </div>
+{% endblock %}
